@@ -1,13 +1,22 @@
 ---
 const links = [
-  { href: 'https://www.linkedin.com/company/', label: 'LinkedIn' },
-  { href: 'https://www.youtube.com/@', label: 'YouTube' },
-  { href: 'https://x.com/', label: 'X' },
+  { href: 'https://www.linkedin.com/company/cavazos-analytics', label: 'LinkedIn' },
+  { href: 'https://www.instagram.com/cavazosanalytics/', label: 'Instagram' },
+  { href: 'https://www.facebook.com/profile.php?id=61579946698922', label: 'Facebook' },
+  { href: 'https://twitter.com/cavazosanalytics', label: 'Twitter' },
+  { href: 'https://www.youtube.com/channel/UCEsAZnMZSntq_2O8yTSn4vA', label: 'YouTube' },
   { href: 'https://github.com/CavazosAnalytics', label: 'GitHub' },
-  { href: 'https://public.tableau.com/app/profile/', label: 'Tableau Public' },
   { href: 'mailto:hello@cavazosanalytics.com', label: 'Email' },
 ];
 ---
 <div class="flex flex-wrap gap-3">
-  {links.map(l => <a href={l.href} class="px-3 py-2 rounded-lg bg-[var(--panel)] text-sm hover:opacity-90">{l.label}</a>)}
+  {links.map(l => (
+    <a
+      href={l.href}
+      class="px-3 py-2 rounded-lg bg-[var(--panel)] text-sm hover:opacity-90"
+      target="_blank" rel="noopener noreferrer"
+    >
+      {l.label}
+    </a>
+  ))}
 </div>
