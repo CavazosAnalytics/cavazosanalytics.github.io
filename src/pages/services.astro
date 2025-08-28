@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout title="Services — Cavazos Analytics" description="Engagement tiers for individuals, teams, and counsel.">
+  <Fragment slot="header"><Header /></Fragment>
+  <section class="py-12 grid md:grid-cols-3 gap-6">
+    <div class="p-6 rounded-2xl bg-[var(--panel)]">
+      <h3 class="text-xl font-semibold">Starter</h3>
+      <p class="mt-2 text-[var(--muted)]">Targeted on‑chain lookup & short memo.</p>
+      <a href="/contact" class="inline-block mt-4 px-4 py-2 rounded-xl bg-blue-into text-white">Inquire</a>
+    </div>
+    <div class="p-6 rounded-2xl bg-[var(--panel)]">
+      <h3 class="text-xl font-semibold">Pro</h3>
+      <p class="mt-2 text-[var(--muted)]">Multi‑entity tracing, dashboard, written report.</p>
+      <a href="/contact" class="inline-block mt-4 px-4 py-2 rounded-xl bg-blue-into text-white">Inquire</a>
+    </div>
+    <div class="p-6 rounded-2xl bg-[var(--panel)]">
+      <h3 class="text-xl font-semibold">Enterprise</h3>
+      <p class="mt-2 text-[var(--muted)]">Complex investigations, expert testimony support.</p>
+      <a href="/contact" class="inline-block mt-4 px-4 py-2 rounded-xl bg-blue-into text-white">Inquire</a>
+    </div>
+  </section>
+  <Fragment slot="footer"><Footer /></Fragment>
+</BaseLayout>

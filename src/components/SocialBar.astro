@@ -1,0 +1,13 @@
+---
+const links = [
+  { href: 'https://www.linkedin.com/company/', label: 'LinkedIn' },
+  { href: 'https://www.youtube.com/@', label: 'YouTube' },
+  { href: 'https://x.com/', label: 'X' },
+  { href: 'https://github.com/CavazosAnalytics', label: 'GitHub' },
+  { href: 'https://public.tableau.com/app/profile/', label: 'Tableau Public' },
+  { href: 'mailto:hello@cavazosanalytics.com', label: 'Email' },
+];
+---
+<div class="flex flex-wrap gap-3">
+  {links.map(l => <a href={l.href} class="px-3 py-2 rounded-lg bg-[var(--panel)] text-sm hover:opacity-90">{l.label}</a>)}
+</div>

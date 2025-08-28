@@ -1,0 +1,9 @@
+:root {
+  --bg: #061829;          /* trapped darkness */
+  --panel: #0a1c2b;       /* darker panel */
+  --ink: #ececec;         /* mercury */
+  --muted: #c8ced2;       /* whisper of smoke */
+  --accent: #4f80ac;      /* into the blue */
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); }

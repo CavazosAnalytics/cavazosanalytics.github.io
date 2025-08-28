@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout title="Contact — Cavazos Analytics" description="Start the conversation.">
+  <Fragment slot="header"><Header /></Fragment>
+  <section class="py-12 max-w-2xl">
+    <form action="https://formspree.io/f/yourid" method="POST" class="space-y-4">
+      <input name="name" placeholder="Your name" required class="w-full rounded-xl bg-[var(--panel)] px-4 py-3" />
+      <input type="email" name="email" placeholder="Email" required class="w-full rounded-xl bg-[var(--panel)] px-4 py-3" />
+      <textarea name="message" placeholder="Tell us about your project…" rows="6" class="w-full rounded-xl bg-[var(--panel)] px-4 py-3"></textarea>
+      <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+      <button class="px-5 py-3 rounded-2xl bg-blue-into text-white">Send</button>
+    </form>
+  </section>
+  <Fragment slot="footer"><Footer /></Fragment>
+</BaseLayout>
