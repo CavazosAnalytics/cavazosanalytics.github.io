@@ -4,24 +4,153 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CTA from "../components/CTA.astro";
 import SocialBar from "../components/SocialBar.astro";
+
+// Content collections (auto import)
+const posts = (await Astro.glob('../content/blog/*.md'))
+  .sort((a,b)=> new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+  .slice(0,3);
+
+const work = (await Astro.glob('../content/portfolio/*.md'))
+  .sort((a,b)=> new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+  .slice(0,3);
+
+// Basic site data
+const siteTitle = "Cavazos Analytics — Data. Markets. Insight.";
+const siteDesc  = "Investigative blockchain analytics & market intelligence for high-stakes decisions.";
+
+const org = {
+  name: "Cavazos Analytics",
+  url: "https://cavazosanalytics.github.io",
+  logo: "/favicon.svg",
+  sameAs: [
+    "https://www.linkedin.com/company/cavazos-analytics",
+    "https://www.instagram.com/cavazosanalytics/",
+    "https://www.facebook.com/profile.php?id=61579946698922",
+    "https://twitter.com/cavazosanalytics",
+    "https://www.youtube.com/channel/UCEsAZnMZSntq_2O8yTSn4vA",
+    "https://github.com/CavazosAnalytics"
+  ]
+};
 ---
-<BaseLayout title="Cavazos Analytics — Data. Markets. Insight." description="Investigative blockchain analytics & market intelligence for high‑stakes decisions.">
+
+<BaseLayout title={siteTitle} description={siteDesc}>
   <Fragment slot="header"><Header /></Fragment>
-  <section class="max-w-6xl mx-auto px-4 py-16">
-    <h1 class="text-4xl md:text-6xl font-semibold tracking-tight">Data. Markets. Insight.</h1>
-    <p class="mt-4 max-w-2xl text-[var(--muted)]">We trace complex on‑chain flows, build market intelligence, and turn data into decisions.</p>
-    <div class="mt-8 flex gap-3">
-      <a href="/contact" class="px-5 py-3 rounded-2xl bg-blue-into text-white">Book consult</a>
-      <a href="/portfolio" class="px-5 py-3 rounded-2xl bg-[var(--panel)]">View portfolio</a>
+
+  {/* HERO */}
+  <section
+    class="max-w-6xl mx-auto px-4 py-16 md:py-24 rounded-2xl overflow-hidden shadow-soft border border-white/5"
+    style="background:
+      linear-gradient(180deg, rgba(6,24,41,.60) 0%, rgba(6,24,41,.92) 70%),
+      url('/img/CA_Post.png') center/cover no-repeat;"
+  >
+    <div class="max-w-3xl">
+      <h1 class="text-4xl md:text-6xl font-semibold leading-tight">
+        Data. Markets. Insight.
+      </h1>
+      <p class="mt-4 text-lg text-[var(--muted)]">
+        We trace complex on-chain flows, build market intelligence, and turn data into decisions.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/contact" class="px-5 py-3 rounded-2xl bg-blue-into text-white">
+          Book consult
+        </a>
+        <a href="/portfolio" class="px-5 py-3 rounded-2xl bg-[var(--panel)]">
+          View portfolio
+        </a>
+      </div>
+
+      {/* Link Hub */}
+      <div class="mt-10">
+        <h2 class="text-sm uppercase tracking-wider text-[var(--muted)] mb-3">Find us</h2>
+        <SocialBar />
+      </div>
     </div>
   </section>
 
-  <section class="max-w-6xl mx-auto px-4 py-8">
-    <h2 class="text-xl font-semibold mb-3">Find us</h2>
-    <SocialBar />
+  {/* CREDIBILITY BLURB (edit later with real numbers / press) */}
+  <section class="max-w-6xl mx-auto px-4 py-10 grid gap-6 md:grid-cols-3">
+    <div class="rounded-2xl bg-[var(--panel)] p-6">
+      <div class="text-2xl font-semibold">10+ yrs</div>
+      <p class="text-[var(--muted)] mt-1">In markets & blockchain analysis</p>
+    </div>
+    <div class="rounded-2xl bg-[var(--panel)] p-6">
+      <div class="text-2xl font-semibold">Investigative</div>
+      <p class="text-[var(--muted)] mt-1">High-stakes tracing & reporting</p>
+    </div>
+    <div class="rounded-2xl bg-[var(--panel)] p-6">
+      <div class="text-2xl font-semibold">Story-driven</div>
+      <p class="text-[var(--muted)] mt-1">Clear narratives, actionable insights</p>
+    </div>
   </section>
 
-  <CTA title="Get weekly signal—no noise." body="Join the newsletter for concise analytics & case studies." href="#footer-newsletter" cta="Subscribe" />
+  {/* FEATURED WORK */}
+  <section class="max-w-6xl mx-auto px-4 py-4">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-2xl font-semibold">Featured work</h2>
+      <a href="/portfolio" class="text-sm text-[var(--muted)] hover:text-[var(--ink)]">See all →</a>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {work.map(({ url, frontmatter }) => (
+        <a href={url} class="block rounded-2xl bg-[var(--panel)] p-5 hover:opacity-95">
+          <div class="text-lg font-semibold">{frontmatter.title}</div>
+          <p class="text-sm text-[var(--muted)] mt-1">{frontmatter.description}</p>
+          <p class="text-xs text-[var(--muted)] mt-3">{frontmatter.date}</p>
+        </a>
+      ))}
+      {work.length === 0 && (
+        <div class="rounded-2xl bg-[var(--panel)] p-5 text-[var(--muted)]">
+          Add items to <code>src/content/portfolio/</code> to populate this section.
+        </div>
+      )}
+    </div>
+  </section>
+
+  {/* LATEST POSTS */}
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-2xl font-semibold">Latest posts</h2>
+      <a href="/blog" class="text-sm text-[var(--muted)] hover:text-[var(--ink)]">Read the blog →</a>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {posts.map(({ url, frontmatter }) => (
+        <a href={url} class="block rounded-2xl bg-[var(--panel)] p-5 hover:opacity-95">
+          <div class="text-lg font-semibold">{frontmatter.title}</div>
+          <p class="text-sm text-[var(--muted)] mt-1">{frontmatter.date}</p>
+          <p class="text-sm text-[var(--muted)] mt-2 line-clamp-3">{frontmatter.description}</p>
+        </a>
+      ))}
+      {posts.length === 0 && (
+        <div class="rounded-2xl bg-[var(--panel)] p-5 text-[var(--muted)]">
+          Add markdown posts to <code>src/content/blog/</code> to populate this section.
+        </div>
+      )}
+    </div>
+  </section>
+
+  {/* CTA STRIP */}
+  <section class="max-w-6xl mx-auto px-4">
+    <CTA
+      title="Get weekly signal—no noise."
+      body="Subscribe for concise analytics, case studies, and market structure notes."
+      href="/contact"
+      cta="Start a conversation"
+    />
+  </section>
+
+  {/* JSON-LD Organization Schema */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": org.name,
+      "url": org.url,
+      "logo": org.logo,
+      "sameAs": org.sameAs
+    })}
+  </script>
 
   <Fragment slot="footer"><Footer /></Fragment>
 </BaseLayout>
